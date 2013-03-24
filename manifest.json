@@ -3,6 +3,7 @@
   "version": "0.1",
   "name": "Assistocat",
   "description": "Tweaks for GitHub UI to simplify collaboration",
+  "permissions": ["storage"],
 
   "icons": {
     "16":  "images/icon-16.png",
@@ -14,5 +15,7 @@
     "js":      ["lib/jquery.min.js", "js/new_comment.js"],
     "css":     ["css/app.css"],
     "matches": ["https://github.com/*"]
-  } ]
+  } ],
+
+  "options_page": "options.html"
 }

@@ -1,7 +1,4 @@
 NEW_COMMENT_BUTTONS_ENABLED = true
-BUTTONS = {
-  "ac-new-comment-button-1": { title: "Looks good", text: "Looks good :+1:" }
-}
 
 newCommentForm = $('.js-new-comment-form')
 
@@ -29,10 +26,9 @@ enableCommentButtons = ->
   observer.observe @actions[0], childList: true
 
   comment = (event) =>
-    button = BUTTONS[event.data.id]
+    event.preventDefault()
 
-    if button
-      event.preventDefault()
+    if @buttons and button = @buttons[event.data.id]
       @commentField.value += button.text
       if button.closable then do @closeButton.click else do @commentButton.click
       $(@commentField).val('')
@@ -47,6 +43,7 @@ enableCommentButtons = ->
     btn
 
   insertButtons = (buttons = {}) ->
+    @buttons = buttons
     @buttonsContainer = document.createElement 'div'
     $(@buttonsContainer).addClass("ac-new-comment-buttons")
     @buttonsContainer.setAttribute 'style', 'float: left; text-align: left; margin-bottom: 10px;'
@@ -58,7 +55,8 @@ enableCommentButtons = ->
     addButtons(@buttonsContainer)
 
   loadData = ->
-    insertButtons(BUTTONS)
+    chrome.storage.sync.get('assistocat.newCommentButtons', (data) ->
+      insertButtons(data["assistocat.newCommentButtons"]))
 
   do loadData
 
