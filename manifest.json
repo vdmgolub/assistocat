@@ -11,8 +11,8 @@
   },
 
   "content_scripts": [ {
-    "js":      ["lib/jquery.min.js"],
-    "css":     [],
+    "js":      ["lib/jquery.min.js", "js/new_comment.js"],
+    "css":     ["css/app.css"],
     "matches": ["https://github.com/*"]
   } ]
 }
